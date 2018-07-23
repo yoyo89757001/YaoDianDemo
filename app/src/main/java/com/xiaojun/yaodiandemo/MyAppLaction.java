@@ -1,24 +1,27 @@
 package com.xiaojun.yaodiandemo;
 
-import android.app.Application;
+
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
+import android.support.multidex.MultiDexApplication;
 import android.util.Log;
 
 
 import com.tencent.bugly.Bugly;
 import com.xiaojun.yaodiandemo.beans.DaoMaster;
 import com.xiaojun.yaodiandemo.beans.DaoSession;
+import com.xiaojun.yaodiandemo.beans.FaceDB;
 
 
 import java.io.File;
-import java.io.IOException;
+
 
 
 /**
  * Created by Administrator on 2017/7/5.
  */
 
-public class MyAppLaction extends Application {
+public class MyAppLaction extends MultiDexApplication {
     private File mCascadeFile;
  //   public static FaceDet mFaceDet;
    // public static String sip=null;
@@ -28,6 +31,7 @@ public class MyAppLaction extends Application {
     public DaoMaster mDaoMaster;
     public DaoSession mDaoSession;
     public static MyAppLaction myAppLaction;
+    public FaceDB mFaceDB;
 
 
     @Override
@@ -39,8 +43,8 @@ public class MyAppLaction extends Application {
         setDatabase();
 
         try {
-            Bugly.init(getApplicationContext(), "a464b976b7", false);
-
+            Bugly.init(getApplicationContext(), "a464b976b000", false);
+            mFaceDB = new FaceDB(this.getExternalCacheDir().getPath());
         //    mFaceDet = new FaceDet(Constants.getFaceShapeModelPath());
 
         //    Reservoir.init(this, 900 * 1024); //in bytes 1M
@@ -81,7 +85,7 @@ public class MyAppLaction extends Application {
         // 可能你已经注意到了，你并不需要去编写「CREATE TABLE」这样的 SQL 语句，因为 greenDAO 已经帮你做了。
         // 注意：默认的 DaoMaster.DevOpenHelper 会在数据库升级时，删除所有的表，意味着这将导致数据的丢失。
         // 所以，在正式的项目中，你还应该做一层封装，来实现数据库的安全升级。
-        DaoMaster.DevOpenHelper mHelper = new DaoMaster.DevOpenHelper(this, "notes-gongan", null);
+        DaoMaster.DevOpenHelper mHelper = new DaoMaster.DevOpenHelper(this, "notes-nihao", null);
         SQLiteDatabase db = mHelper.getWritableDatabase();
         // 注意：该数据库连接属于 DaoMaster，所以多个 Session 指的是相同的数据库连接。
         mDaoMaster = new DaoMaster(db);

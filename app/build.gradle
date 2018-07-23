@@ -18,6 +18,10 @@ android {
             abiFilters "armeabi-v7a"
         }
     }
+    defaultConfig {
+        multiDexEnabled true
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -48,7 +52,8 @@ dependencies {
     implementation 'com.tencent.bugly:nativecrashreport:3.3.1'
     implementation 'com.github.bumptech.glide:glide:3.7.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
-    compile 'com.jakewharton:butterknife:8.8.1'
+    implementation 'com.android.support:design:27.1.1'
+    implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     implementation 'com.liulishuo.filedownloader:library:1.7.4'//文件下载库
     implementation 'com.badoo.mobile:android-weak-handler:1.1'
@@ -59,7 +64,11 @@ dependencies {
     implementation 'com.airbnb.android:lottie:2.5.4' //svg动画
     implementation 'com.hanks:htextview-rainbow:0.1.6'// 彩色字体
     implementation 'com.android.support:recyclerview-v7:27.1.1'
-    implementation 'com.android.support:support-v4:27.1.1'
+    // implementation 'com.android.support:support-v4:27.1.1'
     implementation 'com.robinhood.ticker:ticker:2.0.0'//字体里程表滚动
     implementation 'me.yatoooon:screenadaptation:1.1.1'//适配
+    implementation 'com.guo.android_extend:android-extend:1.0.1'
+    implementation 'com.google.zxing:core:3.3.1'
+    implementation 'com.journeyapps:zxing-android-embedded:3.5.0'
+    implementation 'com.android.support:multidex:1.0.3'
 }

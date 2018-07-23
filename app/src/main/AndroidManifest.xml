@@ -3,6 +3,7 @@
     package="com.xiaojun.yaodiandemo">
 
     <application
+        android:name=".MyAppLaction"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -16,8 +17,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.ShuaShenFenZhenActivity"/>
-        <activity android:name=".ui.GouMaiActivity"/>
+        <activity android:name=".ui.ShuaShenFenZhenActivity" />
+        <activity android:name=".ui.GouMaiActivity" />
+        <activity
+            android:name=".ui.ShuaLianActivity"
+            android:label="@string/title_activity_shua_lian"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ui.ErWeiMaActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+        <activity android:name=".ui.ShuaYaoActivity"></activity>
     </application>
 
 </manifest>

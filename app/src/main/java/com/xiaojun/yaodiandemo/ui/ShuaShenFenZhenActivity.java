@@ -15,10 +15,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.google.zxing.other.BeepManager;
+
+import com.google.zxing.client.android.BeepManager;
 import com.sdsmdg.tastytoast.TastyToast;
 import com.telpo.tps550.api.TelpoException;
 import com.telpo.tps550.api.idcard.IdCard;
@@ -27,11 +27,13 @@ import com.xiaojun.yaodiandemo.MyAppLaction;
 import com.xiaojun.yaodiandemo.R;
 import com.xiaojun.yaodiandemo.beans.BaoCunBean;
 import com.xiaojun.yaodiandemo.beans.BaoCunBeanDao;
-
+import com.xiaojun.yaodiandemo.beans.FaSong;
 import com.xiaojun.yaodiandemo.beans.UserInfoBena;
+import com.xiaojun.yaodiandemo.beans.UserInfoBenaDao;
 import com.xiaojun.yaodiandemo.dialog.JiaZaiDialog;
 import com.xiaojun.yaodiandemo.utils.FileUtil;
 
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -62,7 +64,7 @@ public class ShuaShenFenZhenActivity extends Activity {
     private Bitmap bitmapBig = null;
     private GetIDInfoTask async = null;
     private UserInfoBena userInfoBena = null;
-
+    private UserInfoBenaDao userInfoBenaDao=null;
     private Thread thread;
     private BeepManager beepManager;
     private IdentityInfo info;
@@ -91,15 +93,21 @@ public class ShuaShenFenZhenActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.zhujiemian4);
+        userInfoBenaDao=MyAppLaction.myAppLaction.getDaoSession().getUserInfoBenaDao();
         baoCunBeanDao = MyAppLaction.myAppLaction.getDaoSession().getBaoCunBeanDao();
         baoCunBean = baoCunBeanDao.load(123456L);
-
+        userInfoBena=userInfoBenaDao.load(123456L);
+        if (userInfoBena==null){
+            userInfoBena = new UserInfoBena();
+            userInfoBena.setId(123456L);
+            userInfoBenaDao.insert(userInfoBena);
+        }
 
         String fn = "bbbb.jpg";
         FileUtil.isExists(FileUtil.PATH, fn);
         mSavePhotoFile = new File(FileUtil.SDPATH + File.separator + FileUtil.PATH + File.separator + fn);
 
-        beepManager = new BeepManager(this, R.raw.beep);
+        beepManager = new BeepManager(this);
         new Thread(new Runnable() {
 
             @Override
@@ -124,10 +132,6 @@ public class ShuaShenFenZhenActivity extends Activity {
             }
         }).start();
 
-
-
-
-        userInfoBena = new UserInfoBena();
 
 
         ImageView imageView = (ImageView) findViewById(R.id.dd);
@@ -187,7 +191,6 @@ public class ShuaShenFenZhenActivity extends Activity {
 
     private void initView() {
 
-
         name = (TextView) findViewById(R.id.name);
         shenfengzheng = (EditText) findViewById(R.id.shenfenzheng);
         xingbie = (EditText) findViewById(R.id.xingbie);
@@ -207,7 +210,8 @@ public class ShuaShenFenZhenActivity extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                EventBus.getDefault().post(new FaSong("im1","",true));
+                finish();
 
             }
         });
@@ -217,8 +221,7 @@ public class ShuaShenFenZhenActivity extends Activity {
 
 
 
-
-    private class GetIDInfoTask extends
+      class GetIDInfoTask extends
             AsyncTask<Void, Integer, TelpoException> {
 
 
@@ -291,10 +294,13 @@ public class ShuaShenFenZhenActivity extends Activity {
                 String fn = "aaaa.jpg";
                 FileUtil.isExists(FileUtil.PATH, fn);
 
+                userInfoBena = new UserInfoBena(123456L,info.getName(), info.getSex().equals("男") ? 1 + "" : 2 + "", info.getNation(), time, info.getAddress(), info.getNo(), info.getApartment(), time2, time3, null, null, null);
+
                 saveBitmap2File(zhengjianBitmap.copy(Bitmap.Config.ARGB_8888, false), FileUtil.SDPATH + File.separator + FileUtil.PATH + File.separator + fn, 100);
 
-                userInfoBena = new UserInfoBena(info.getName(), info.getSex().equals("男") ? 1 + "" : 2 + "", info.getNation(), time, info.getAddress(), info.getNo(), info.getApartment(), time2, time3, null, null, null);
-
+                Toast tastyToast = TastyToast.makeText(ShuaShenFenZhenActivity.this, "身份证信息读取成功", TastyToast.LENGTH_LONG, TastyToast.INFO);
+                tastyToast.setGravity(Gravity.CENTER, 0, 0);
+                tastyToast.show();
 
             } else {
                 isTrue2 = true;
@@ -331,7 +337,12 @@ public class ShuaShenFenZhenActivity extends Activity {
             bos.flush();
             bos.close();
 
-            //开启摄像头
+            userInfoBena.setCardPhoto(path);
+            userInfoBenaDao.update(userInfoBena);
+            if (jiaZaiDialog!=null &&jiaZaiDialog.isShowing()){
+                jiaZaiDialog.dismiss();
+                jiaZaiDialog=null;
+            }
 
 
         } catch (Exception e) {
@@ -351,8 +362,6 @@ public class ShuaShenFenZhenActivity extends Activity {
     protected void onPause() {
         super.onPause();
 
-
-
         isTrue2 = false;
         isTrue = false;
 
@@ -366,11 +375,11 @@ public class ShuaShenFenZhenActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
-        if (beepManager != null) {
-            beepManager.close();
-            beepManager = null;
-        }
+        EventBus.getDefault().unregister(this);//解除订阅
+//        if (beepManager != null) {
+//            beepManager.
+//            beepManager = null;
+//        }
         IdCard.close();
 
         if (async != null) {

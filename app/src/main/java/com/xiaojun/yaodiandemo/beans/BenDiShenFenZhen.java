@@ -6,10 +6,11 @@ import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.Generated;
 
 /**
- * Created by Administrator on 2017/6/21.
+ * Created by Administrator on 2018/7/23.
  */
+
 @Entity
-public class UserInfoBena {
+public class BenDiShenFenZhen {
     @Id
     @NotNull
     private Long id;
@@ -25,8 +26,8 @@ public class UserInfoBena {
     private String cardPhoto=null;
     private String scanPhoto=null;
     private String type;
-    @Generated(hash = 1231095440)
-    public UserInfoBena(@NotNull Long id, String partyName, String gender,
+    @Generated(hash = 646931991)
+    public BenDiShenFenZhen(@NotNull Long id, String partyName, String gender,
             String nation, String bornDay, String certAddress, String certNumber,
             String certOrg, String effDate, String expDate, String cardPhoto,
             String scanPhoto, String type) {
@@ -44,11 +45,8 @@ public class UserInfoBena {
         this.scanPhoto = scanPhoto;
         this.type = type;
     }
-
-
-
-    @Generated(hash = 654706014)
-    public UserInfoBena() {
+    @Generated(hash = 1463439076)
+    public BenDiShenFenZhen() {
     }
     public Long getId() {
         return this.id;
@@ -131,6 +129,5 @@ public class UserInfoBena {
 
 
 
-    
 
 }
