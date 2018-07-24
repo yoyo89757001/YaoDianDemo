@@ -34,6 +34,7 @@ public class ChaXunYaoJiLuActivity extends Activity {
     private ChaXunYaoAdapter adapter;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
