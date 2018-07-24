@@ -295,7 +295,7 @@ public class ShuaShenFenZhenActivity extends Activity {
                 FileUtil.isExists(FileUtil.PATH, fn);
                 Long id=System.currentTimeMillis();
                 MyAppLaction.ShenfenzhengId=id;
-                userInfoBena = new UserInfoBena(id,info.getName(), info.getSex().equals("男") ? 1 + "" : 2 + "", info.getNation(), time, info.getAddress(), info.getNo(), info.getApartment(), time2, time3, null, null, null,null);
+                userInfoBena = new UserInfoBena(id,info.getName(), info.getSex().equals("男") ? 1 + "" : 2 + "", info.getNation(), time, info.getAddress(), info.getNo(), info.getApartment(), time2, time3, null, null, null,null,null);
 
                 saveBitmap2File(zhengjianBitmap.copy(Bitmap.Config.ARGB_8888, false), FileUtil.SDPATH + File.separator + FileUtil.PATH + File.separator + fn, 100);
 

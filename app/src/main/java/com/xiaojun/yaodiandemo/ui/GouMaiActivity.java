@@ -16,13 +16,13 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.sdsmdg.tastytoast.TastyToast;
 import com.xiaojun.yaodiandemo.MyAppLaction;
 import com.xiaojun.yaodiandemo.R;
 import com.xiaojun.yaodiandemo.adapter.PopupWindowAdapter;
 import com.xiaojun.yaodiandemo.beans.FaSong;
-
+import com.xiaojun.yaodiandemo.beans.UserInfoBena;
+import com.xiaojun.yaodiandemo.beans.UserInfoBenaDao;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -98,7 +98,7 @@ public class GouMaiActivity extends AppCompatActivity {
                     startActivity(new Intent(GouMaiActivity.this, ShuaLianActivity.class));
 
                 } else {
-                    Toast tastyToast = TastyToast.makeText(GouMaiActivity.this, "请先读取身份证信息", TastyToast.LENGTH_LONG, TastyToast.ERROR);
+                    Toast tastyToast = TastyToast.makeText(GouMaiActivity.this, "请先读取身份证信息", TastyToast.LENGTH_SHORT, TastyToast.ERROR);
                     tastyToast.setGravity(Gravity.CENTER, 0, 0);
                     tastyToast.show();
                 }
@@ -111,7 +111,7 @@ public class GouMaiActivity extends AppCompatActivity {
                     startActivity(new Intent(GouMaiActivity.this, ShuaYaoActivity.class));
                 }
                 else {
-                    Toast tastyToast = TastyToast.makeText(GouMaiActivity.this, "请先读取身份证信息", TastyToast.LENGTH_LONG, TastyToast.ERROR);
+                    Toast tastyToast = TastyToast.makeText(GouMaiActivity.this, "请先读取身份证信息", TastyToast.LENGTH_SHORT, TastyToast.ERROR);
                     tastyToast.setGravity(Gravity.CENTER, 0, 0);
                     tastyToast.show();
                 }
@@ -122,7 +122,7 @@ public class GouMaiActivity extends AppCompatActivity {
                     startActivity(new Intent(GouMaiActivity.this, ShuaChuFangActivity.class));
                 }
                 else {
-                    Toast tastyToast = TastyToast.makeText(GouMaiActivity.this, "请先读取身份证信息", TastyToast.LENGTH_LONG, TastyToast.ERROR);
+                    Toast tastyToast = TastyToast.makeText(GouMaiActivity.this, "请先读取身份证信息", TastyToast.LENGTH_SHORT, TastyToast.ERROR);
                     tastyToast.setGravity(Gravity.CENTER, 0, 0);
                     tastyToast.show();
                   }
@@ -132,28 +132,60 @@ public class GouMaiActivity extends AppCompatActivity {
 
                 break;
             case R.id.shangchuan:
+                if (im1.getVisibility()==View.VISIBLE && im3.getVisibility()==View.VISIBLE && im4.getVisibility()==View.VISIBLE
+                        &&im5.getVisibility()==View.VISIBLE){
+
+
+                    Toast tastyToast = TastyToast.makeText(GouMaiActivity.this, "上传成功", TastyToast.LENGTH_SHORT, TastyToast.INFO);
+                    tastyToast.setGravity(Gravity.CENTER, 0, 0);
+                    tastyToast.show();
+                    finish();
+                }else {
+
+                    Toast tastyToast = TastyToast.makeText(GouMaiActivity.this, "抱歉,数据不完整,不能上传", TastyToast.LENGTH_SHORT, TastyToast.ERROR);
+                    tastyToast.setGravity(Gravity.CENTER, 0, 0);
+                    tastyToast.show();
+                }
+
 
                 break;
             case R.id.tt1:
-                View contentView2 = LayoutInflater.from(GouMaiActivity.this).inflate(R.layout.xiangmu_po_item, null);
-                ListView listView2= (ListView) contentView2.findViewById(R.id.dddddd);
-                adapterss=new PopupWindowAdapter(GouMaiActivity.this,stringList2);
-                listView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        shenpiren.setText(stringList2.get(position));
-                        popupWindow.dismiss();
+                if (MyAppLaction.ShenfenzhengId!=0) {
 
-                    }
-                });
-                listView2.setAdapter(adapterss);
-                popupWindow=new PopupWindow(contentView2,320, 240);
-                popupWindow.setFocusable(true);//获取焦点
-                popupWindow.setOutsideTouchable(true);//获取外部触摸事件
-                popupWindow.setTouchable(true);//能够响应触摸事件
-                popupWindow.setBackgroundDrawable(new ColorDrawable(0x00000000));//设置背景
-                popupWindow.showAsDropDown(shenpiren, 0,4);
+                    View contentView2 = LayoutInflater.from(GouMaiActivity.this).inflate(R.layout.xiangmu_po_item, null);
+                    ListView listView2 = (ListView) contentView2.findViewById(R.id.dddddd);
+                    adapterss = new PopupWindowAdapter(GouMaiActivity.this, stringList2);
+                    listView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            shenpiren.setText(stringList2.get(position));
+                            if (position > 0) {
+                                EventBus.getDefault().post(new FaSong("im5", "", true));
+                            } else {
+                                EventBus.getDefault().post(new FaSong("im5", "", false));
+                            }
+                            UserInfoBenaDao dao = MyAppLaction.myAppLaction.getDaoSession().getUserInfoBenaDao();
+                           UserInfoBena bena= dao.load(MyAppLaction.ShenfenzhengId);
+                           bena.setShenFangRen(stringList2.get(position));
+                           dao.update(bena);
 
+                            popupWindow.dismiss();
+
+                        }
+                    });
+                    listView2.setAdapter(adapterss);
+                    popupWindow = new PopupWindow(contentView2, 320, 240);
+                    popupWindow.setFocusable(true);//获取焦点
+                    popupWindow.setOutsideTouchable(true);//获取外部触摸事件
+                    popupWindow.setTouchable(true);//能够响应触摸事件
+                    popupWindow.setBackgroundDrawable(new ColorDrawable(0x00000000));//设置背景
+                    popupWindow.showAsDropDown(shenpiren, 0, 4);
+                }else {
+
+                    Toast tastyToast = TastyToast.makeText(GouMaiActivity.this, "请先读取身份证信息", TastyToast.LENGTH_SHORT, TastyToast.ERROR);
+                    tastyToast.setGravity(Gravity.CENTER, 0, 0);
+                    tastyToast.show();
+                }
                 break;
         }
     }
@@ -198,7 +230,12 @@ public class GouMaiActivity extends AppCompatActivity {
 
                 break;
             case "im5":
-
+                if (event.isTrue()) {
+                    im5.setVisibility(View.VISIBLE);
+                    im5.setBackgroundResource(R.drawable.dagou);
+                } else {
+                    im5.setVisibility(View.GONE);
+                }
 
                 break;
         }

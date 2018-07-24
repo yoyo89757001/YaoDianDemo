@@ -110,21 +110,25 @@ public class ShuaYaoActivity extends Activity {
 
                 break;
             case R.id.baocun:
-
-                for (TianJiaYao tianJiaYao:tianJiaYaoList){
-                    try {
-                        tianJiaYaoDao.insert(tianJiaYao);
-                    }catch (Exception e){
-                        Log.d("ShuaYaoActivity", e.getMessage()+"添加到本地异常");
+                if (tianJiaYaoList.size()>0) {
+                    for (TianJiaYao tianJiaYao : tianJiaYaoList) {
+                        try {
+                            tianJiaYaoDao.insert(tianJiaYao);
+                        } catch (Exception e) {
+                            Log.d("ShuaYaoActivity", e.getMessage() + "添加到本地异常");
+                        }
                     }
 
+                    Toast tastyToast = TastyToast.makeText(ShuaYaoActivity.this, "保存成功", TastyToast.LENGTH_SHORT, TastyToast.INFO);
+                    tastyToast.setGravity(Gravity.CENTER, 0, 0);
+                    tastyToast.show();
+                    EventBus.getDefault().post(new FaSong("im3", "", true));
+                    finish();
+                }else {
+                    Toast tastyToast = TastyToast.makeText(ShuaYaoActivity.this, "没有药品数据,不能保存", TastyToast.LENGTH_SHORT, TastyToast.INFO);
+                    tastyToast.setGravity(Gravity.CENTER, 0, 0);
+                    tastyToast.show();
                 }
-
-                Toast tastyToast = TastyToast.makeText(ShuaYaoActivity.this, "保存成功", TastyToast.LENGTH_SHORT, TastyToast.INFO);
-                tastyToast.setGravity(Gravity.CENTER, 0, 0);
-                tastyToast.show();
-                EventBus.getDefault().post(new FaSong("im3","",true));
-                finish();
 
                 break;
         }

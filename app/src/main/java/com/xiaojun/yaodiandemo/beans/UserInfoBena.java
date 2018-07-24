@@ -26,11 +26,12 @@ public class UserInfoBena {
     private String scanPhoto=null;
     private String type;
     private String yaoDanPath;
-    @Generated(hash = 1101829185)
+    private String shenFangRen;
+    @Generated(hash = 1209890349)
     public UserInfoBena(@NotNull Long id, String partyName, String gender,
             String nation, String bornDay, String certAddress, String certNumber,
             String certOrg, String effDate, String expDate, String cardPhoto,
-            String scanPhoto, String type, String yaoDanPath) {
+            String scanPhoto, String type, String yaoDanPath, String shenFangRen) {
         this.id = id;
         this.partyName = partyName;
         this.gender = gender;
@@ -45,6 +46,7 @@ public class UserInfoBena {
         this.scanPhoto = scanPhoto;
         this.type = type;
         this.yaoDanPath = yaoDanPath;
+        this.shenFangRen = shenFangRen;
     }
     @Generated(hash = 654706014)
     public UserInfoBena() {
@@ -133,7 +135,12 @@ public class UserInfoBena {
     public void setYaoDanPath(String yaoDanPath) {
         this.yaoDanPath = yaoDanPath;
     }
-
+    public String getShenFangRen() {
+        return this.shenFangRen;
+    }
+    public void setShenFangRen(String shenFangRen) {
+        this.shenFangRen = shenFangRen;
+    }
 
 
     

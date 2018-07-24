@@ -5,11 +5,14 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.sdsmdg.tastytoast.TastyToast;
 import com.xiaojun.yaodiandemo.MyAppLaction;
 import com.xiaojun.yaodiandemo.R;
 import com.xiaojun.yaodiandemo.beans.FaSong;
@@ -103,6 +106,10 @@ public class ShuaChuFangActivity extends Activity {
                UserInfoBena bena= dao.load(MyAppLaction.ShenfenzhengId);
                bena.setYaoDanPath(mSavePhotoFile.getPath());
                dao.update(bena);
+
+              Toast tastyToast = TastyToast.makeText(ShuaChuFangActivity.this, "保存成功", TastyToast.LENGTH_SHORT, TastyToast.INFO);
+              tastyToast.setGravity(Gravity.CENTER, 0, 0);
+              tastyToast.show();
                finish();
 
                 break;

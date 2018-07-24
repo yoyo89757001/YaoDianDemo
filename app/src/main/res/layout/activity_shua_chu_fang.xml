@@ -62,14 +62,16 @@
         android:scaleType="fitXY"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_above="@+id/hhyy"
         android:layout_below="@+id/fanhui"
         android:layout_width="match_parent"
-        android:layout_height="350dp" />
+        android:layout_height="match_parent" />
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_marginTop="20dp"
+        android:id="@+id/hhyy"
         android:layout_alignParentBottom="true"
         android:gravity="center"
         android:layout_marginBottom="30dp"
