@@ -51,7 +51,7 @@ public class ShouYeActivity extends Activity {
         imageView22.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             //   startActivity(new Intent(ShouYeActivity.this,HuZhaoActivity2.class));
+                startActivity(new Intent(ShouYeActivity.this,ChaXunYaoJiLuActivity.class));
             }
         });
 
@@ -59,7 +59,7 @@ public class ShouYeActivity extends Activity {
         imageView44.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  startActivity(new Intent(ShouYeActivity.this,ChaXunActivity.class).putExtra("type",11));
+                startActivity(new Intent(ShouYeActivity.this,ChaXunHuanJingActivity.class));
             }
         });
 

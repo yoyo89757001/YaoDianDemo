@@ -174,7 +174,7 @@ public class GouMaiActivity extends AppCompatActivity {
                         }
                     });
                     listView2.setAdapter(adapterss);
-                    popupWindow = new PopupWindow(contentView2, 320, 240);
+                    popupWindow = new PopupWindow(contentView2, 320, 280);
                     popupWindow.setFocusable(true);//获取焦点
                     popupWindow.setOutsideTouchable(true);//获取外部触摸事件
                     popupWindow.setTouchable(true);//能够响应触摸事件

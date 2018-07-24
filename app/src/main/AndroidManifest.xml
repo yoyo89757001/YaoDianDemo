@@ -27,8 +27,12 @@
             android:name=".ui.ErWeiMaActivity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
         <activity android:name=".ui.ShuaYaoActivity" />
-        <activity android:name=".ui.ShuaChuFangActivity"/>
-
+        <activity android:name=".ui.ShuaChuFangActivity" />
+        <activity android:name=".ui.ChaXunHuanJingActivity" android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".ui.ChaXunYaoJiLuActivity" android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".ui.DatePickActivity"
+            android:theme="@style/MyDialogStyleBottom" />
 
     </application>
 

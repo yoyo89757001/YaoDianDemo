@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/beijing"
+    android:layout_height="match_parent"
+    tools:context="com.xiaojun.yaodiandemo.ui.ChaXunHuanJingActivity">
+    <RelativeLayout
+        android:id="@+id/fanhui"
+        android:layout_width="match_parent"
+        android:layout_height="54dp">
+
+        <ImageView
+            android:id="@+id/gg"
+            android:layout_centerVertical="true"
+            android:src="@drawable/fanhui"
+            android:layout_width="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_height="16dp" />
+
+        <TextView
+            android:textColor="@color/write"
+            android:textSize="16sp"
+            android:text="返回"
+            android:id="@+id/t_fanhui"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/gg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:textColor="@color/write"
+            android:textSize="20sp"
+            android:text="环境信息记录"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:background="@color/write"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="0.8dp"/>
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
