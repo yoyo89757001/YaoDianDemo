@@ -25,6 +25,7 @@
     <ImageView
         android:layout_width="62dp"
         android:padding="15dp"
+        android:visibility="gone"
         android:layout_centerVertical="true"
         android:id="@+id/dd"
         android:src="@drawable/fanhui"
@@ -43,7 +44,7 @@
             android:layout_width="40dp"
             android:id="@+id/dd22"
             android:layout_gravity="center_vertical"
-            android:background="@drawable/gonganlogo"
+            android:background="@drawable/yaodianlogo"
             android:layout_height="40dp"
             />
 
@@ -391,10 +392,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ems="1"
-                        android:layout_marginLeft="6dp"
+                        android:layout_marginLeft="8dp"
                         android:text="证件照"
                         android:textColor="@color/write"
-                        android:textSize="14sp" />
+                        android:textSize="18sp" />
 
                 </LinearLayout>
 

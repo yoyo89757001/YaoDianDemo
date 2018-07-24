@@ -32,6 +32,7 @@ public class MyAppLaction extends MultiDexApplication {
     public DaoSession mDaoSession;
     public static MyAppLaction myAppLaction;
     public FaceDB mFaceDB;
+    public static Long ShenfenzhengId=0L;
 
 
     @Override

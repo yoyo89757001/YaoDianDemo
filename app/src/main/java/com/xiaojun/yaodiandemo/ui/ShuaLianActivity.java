@@ -108,7 +108,7 @@ public class ShuaLianActivity extends Activity implements CameraSurfaceView.OnCa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shua_lian);
         UserInfoBenaDao userInfoBenaDao=MyAppLaction.myAppLaction.getDaoSession().getUserInfoBenaDao();
-        UserInfoBena userInfoBena=userInfoBenaDao.load(123456L);
+        UserInfoBena userInfoBena=userInfoBenaDao.load(MyAppLaction.ShenfenzhengId);
         AFT_FSDKError err = engine.AFT_FSDK_InitialFaceEngine(FaceDB.appid, FaceDB.ft_key, AFT_FSDKEngine.AFT_OPF_0_HIGHER_EXT, 16, 5);
         Log.d(TAG, "AFT_FSDK_InitialFaceEngine =" + err.getCode());
         err = engine.AFT_FSDK_GetVersion(version);

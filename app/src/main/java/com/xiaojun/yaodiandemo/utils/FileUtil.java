@@ -13,7 +13,7 @@ import java.io.FileOutputStream;
 
 public class FileUtil {
     public static final String SDPATH = Environment.getExternalStorageDirectory().getAbsolutePath();
-    public static final String PATH = "ruitongPD";
+    public static final String PATH = "yaodian";
 
     /**
      * 是否支持SDCard

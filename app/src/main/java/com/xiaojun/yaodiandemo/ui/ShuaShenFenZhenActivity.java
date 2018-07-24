@@ -96,16 +96,16 @@ public class ShuaShenFenZhenActivity extends Activity {
         userInfoBenaDao=MyAppLaction.myAppLaction.getDaoSession().getUserInfoBenaDao();
         baoCunBeanDao = MyAppLaction.myAppLaction.getDaoSession().getBaoCunBeanDao();
         baoCunBean = baoCunBeanDao.load(123456L);
-        userInfoBena=userInfoBenaDao.load(123456L);
-        if (userInfoBena==null){
-            userInfoBena = new UserInfoBena();
-            userInfoBena.setId(123456L);
-            userInfoBenaDao.insert(userInfoBena);
-        }
+//        userInfoBena=userInfoBenaDao.load(123456L);
+//        if (userInfoBena==null){
+//            userInfoBena = new UserInfoBena();
+//            userInfoBena.setId(123456L);
+//            userInfoBenaDao.insert(userInfoBena);
+//        }
 
-        String fn = "bbbb.jpg";
-        FileUtil.isExists(FileUtil.PATH, fn);
-        mSavePhotoFile = new File(FileUtil.SDPATH + File.separator + FileUtil.PATH + File.separator + fn);
+//        String fn = "bbbb.jpg";
+//        FileUtil.isExists(FileUtil.PATH, fn);
+//        mSavePhotoFile = new File(FileUtil.SDPATH + File.separator + FileUtil.PATH + File.separator + fn);
 
         beepManager = new BeepManager(this);
         new Thread(new Runnable() {
@@ -291,10 +291,11 @@ public class ShuaShenFenZhenActivity extends Activity {
 
 
                 zhengjianzhao.setImageBitmap(zhengjianBitmap);
-                String fn = "aaaa.jpg";
+                String fn = System.currentTimeMillis()+".jpg";
                 FileUtil.isExists(FileUtil.PATH, fn);
-
-                userInfoBena = new UserInfoBena(123456L,info.getName(), info.getSex().equals("男") ? 1 + "" : 2 + "", info.getNation(), time, info.getAddress(), info.getNo(), info.getApartment(), time2, time3, null, null, null);
+                Long id=System.currentTimeMillis();
+                MyAppLaction.ShenfenzhengId=id;
+                userInfoBena = new UserInfoBena(id,info.getName(), info.getSex().equals("男") ? 1 + "" : 2 + "", info.getNation(), time, info.getAddress(), info.getNo(), info.getApartment(), time2, time3, null, null, null,null);
 
                 saveBitmap2File(zhengjianBitmap.copy(Bitmap.Config.ARGB_8888, false), FileUtil.SDPATH + File.separator + FileUtil.PATH + File.separator + fn, 100);
 
@@ -338,7 +339,7 @@ public class ShuaShenFenZhenActivity extends Activity {
             bos.close();
 
             userInfoBena.setCardPhoto(path);
-            userInfoBenaDao.update(userInfoBena);
+            userInfoBenaDao.insert(userInfoBena);
             if (jiaZaiDialog!=null &&jiaZaiDialog.isShowing()){
                 jiaZaiDialog.dismiss();
                 jiaZaiDialog=null;

@@ -26,7 +26,8 @@
         <activity
             android:name=".ui.ErWeiMaActivity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-        <activity android:name=".ui.ShuaYaoActivity"></activity>
+        <activity android:name=".ui.ShuaYaoActivity" />
+        <activity android:name=".ui.ShuaChuFangActivity"></activity>
     </application>
 
 </manifest>

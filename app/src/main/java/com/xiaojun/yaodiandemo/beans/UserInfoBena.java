@@ -25,11 +25,12 @@ public class UserInfoBena {
     private String cardPhoto=null;
     private String scanPhoto=null;
     private String type;
-    @Generated(hash = 1231095440)
+    private String yaoDanPath;
+    @Generated(hash = 1101829185)
     public UserInfoBena(@NotNull Long id, String partyName, String gender,
             String nation, String bornDay, String certAddress, String certNumber,
             String certOrg, String effDate, String expDate, String cardPhoto,
-            String scanPhoto, String type) {
+            String scanPhoto, String type, String yaoDanPath) {
         this.id = id;
         this.partyName = partyName;
         this.gender = gender;
@@ -43,10 +44,8 @@ public class UserInfoBena {
         this.cardPhoto = cardPhoto;
         this.scanPhoto = scanPhoto;
         this.type = type;
+        this.yaoDanPath = yaoDanPath;
     }
-
-
-
     @Generated(hash = 654706014)
     public UserInfoBena() {
     }
@@ -127,6 +126,12 @@ public class UserInfoBena {
     }
     public void setType(String type) {
         this.type = type;
+    }
+    public String getYaoDanPath() {
+        return this.yaoDanPath;
+    }
+    public void setYaoDanPath(String yaoDanPath) {
+        this.yaoDanPath = yaoDanPath;
     }
 
 

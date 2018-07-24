@@ -11,8 +11,13 @@ import android.widget.TextView;
 
 
 import com.xiaojun.yaodiandemo.R;
+import com.xiaojun.yaodiandemo.beans.Bianji;
+import com.xiaojun.yaodiandemo.beans.FaSong;
 import com.xiaojun.yaodiandemo.beans.TianJiaYao;
 import com.xiaojun.yaodiandemo.dialog.BianJiDialog;
+import com.xiaojun.yaodiandemo.dialog.ShanChuDialog;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -81,14 +86,43 @@ public class GouMaiYaoAdapter extends BaseAdapter {
         holder.bianji.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BianJiDialog dialog=new BianJiDialog(context);
+                final BianJiDialog dialog=new BianJiDialog(context);
+                dialog.setText(fuWuQiBeanList.get(position).getYaoming(),fuWuQiBeanList.get(position).getShuliang()+"");
+                dialog.setImageView("");
+                dialog.setOnPositiveListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        EventBus.getDefault().post(new Bianji(position,dialog.getYaoMing(),Integer.valueOf(dialog.getShuLiang()),1));
+                        dialog.dismiss();
+                    }
+                });
+                dialog.setOnQuXiaoListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
                 dialog.show();
             }
         });
         holder.shanchu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("GouMaiYaoAdapter", "dddd");
+                final ShanChuDialog dialog=new ShanChuDialog(context);
+                dialog.setOnPositiveListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        EventBus.getDefault().post(new Bianji(position,null,1,2));
+                        dialog.dismiss();
+                    }
+                });
+                dialog.setOnQuXiaoListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
             }
         });
 

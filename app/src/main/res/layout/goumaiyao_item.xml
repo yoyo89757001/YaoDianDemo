@@ -46,19 +46,17 @@
 
             <ImageView
                 android:id="@+id/bianji"
-                android:padding="2dp"
+                android:padding="8dp"
                 android:src="@drawable/bianji"
-                android:layout_width="30dp"
-                android:layout_marginRight="5dp"
-                android:layout_height="30dp" />
+                android:layout_width="40dp"
+                android:layout_height="40dp" />
 
             <ImageView
-                android:padding="2dp"
+                android:padding="8dp"
                 android:id="@+id/shanchu"
                 android:src="@drawable/shanchu"
-                android:layout_marginLeft="5dp"
-                android:layout_width="30dp"
-                android:layout_height="30dp" />
+                android:layout_width="40dp"
+                android:layout_height="40dp" />
 
 
         </LinearLayout>

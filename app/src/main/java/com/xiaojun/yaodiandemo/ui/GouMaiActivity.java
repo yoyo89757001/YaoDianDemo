@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sdsmdg.tastytoast.TastyToast;
+import com.xiaojun.yaodiandemo.MyAppLaction;
 import com.xiaojun.yaodiandemo.R;
 import com.xiaojun.yaodiandemo.adapter.PopupWindowAdapter;
 import com.xiaojun.yaodiandemo.beans.FaSong;
@@ -91,7 +92,8 @@ public class GouMaiActivity extends AppCompatActivity {
                 break;
             case R.id.dengji3:
                 dengji3.setEnabled(false);
-                if (im1.getVisibility() != View.VISIBLE) {
+
+                if (MyAppLaction.ShenfenzhengId!=0) {
                     //刷脸
                     startActivity(new Intent(GouMaiActivity.this, ShuaLianActivity.class));
 
@@ -99,15 +101,31 @@ public class GouMaiActivity extends AppCompatActivity {
                     Toast tastyToast = TastyToast.makeText(GouMaiActivity.this, "请先读取身份证信息", TastyToast.LENGTH_LONG, TastyToast.ERROR);
                     tastyToast.setGravity(Gravity.CENTER, 0, 0);
                     tastyToast.show();
-
                 }
                 dengji3.setEnabled(true);
-                break;
-            case R.id.dengji4:
-                startActivity(new Intent(GouMaiActivity.this, ShuaYaoActivity.class));
 
                 break;
+            case R.id.dengji4:
+
+                if (MyAppLaction.ShenfenzhengId!=0){
+                    startActivity(new Intent(GouMaiActivity.this, ShuaYaoActivity.class));
+                }
+                else {
+                    Toast tastyToast = TastyToast.makeText(GouMaiActivity.this, "请先读取身份证信息", TastyToast.LENGTH_LONG, TastyToast.ERROR);
+                    tastyToast.setGravity(Gravity.CENTER, 0, 0);
+                    tastyToast.show();
+                }
+                break;
             case R.id.dengji5:
+
+                if (MyAppLaction.ShenfenzhengId!=0){
+                    startActivity(new Intent(GouMaiActivity.this, ShuaChuFangActivity.class));
+                }
+                else {
+                    Toast tastyToast = TastyToast.makeText(GouMaiActivity.this, "请先读取身份证信息", TastyToast.LENGTH_LONG, TastyToast.ERROR);
+                    tastyToast.setGravity(Gravity.CENTER, 0, 0);
+                    tastyToast.show();
+                  }
 
                 break;
             case R.id.shenpiren:
@@ -141,9 +159,6 @@ public class GouMaiActivity extends AppCompatActivity {
     }
 
 
-
-
-
     @Subscribe(threadMode = ThreadMode.MAIN) //在ui线程执行
     public void onDataSynEvent(FaSong event) {
         switch (event.getType()) {
@@ -169,10 +184,17 @@ public class GouMaiActivity extends AppCompatActivity {
                 break;
             case "im3":
 
+                if (event.isTrue()) {
+                    im3.setVisibility(View.VISIBLE);
+                    im3.setBackgroundResource(R.drawable.dagou);
+                }
 
                 break;
             case "im4":
-
+                if (event.isTrue()) {
+                    im4.setVisibility(View.VISIBLE);
+                    im4.setBackgroundResource(R.drawable.dagou);
+                }
 
                 break;
             case "im5":
@@ -184,5 +206,11 @@ public class GouMaiActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onDestroy() {
+        MyAppLaction.ShenfenzhengId=0L;
+        EventBus.getDefault().unregister(this);//解除订阅
+        super.onDestroy();
 
+    }
 }

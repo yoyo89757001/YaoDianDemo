@@ -17,10 +17,17 @@ import com.sdsmdg.tastytoast.TastyToast;
 import com.xiaojun.yaodiandemo.MyAppLaction;
 import com.xiaojun.yaodiandemo.R;
 import com.xiaojun.yaodiandemo.adapter.GouMaiYaoAdapter;
+import com.xiaojun.yaodiandemo.beans.Bianji;
+import com.xiaojun.yaodiandemo.beans.FaSong;
 import com.xiaojun.yaodiandemo.beans.TianJiaYao;
+import com.xiaojun.yaodiandemo.beans.TianJiaYaoDao;
 import com.xiaojun.yaodiandemo.beans.UserInfoBena;
 import com.xiaojun.yaodiandemo.beans.UserInfoBenaDao;
 import com.xiaojun.yaodiandemo.utils.DateUtils;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,13 +52,16 @@ public class ShuaYaoActivity extends Activity {
     private UserInfoBena userInfoBena = null;
     private GouMaiYaoAdapter adapter;
     private List<TianJiaYao> tianJiaYaoList = new ArrayList<>();
+    private TianJiaYaoDao tianJiaYaoDao=MyAppLaction.myAppLaction.getDaoSession().getTianJiaYaoDao();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shua_yao);
         ButterKnife.bind(this);
-        userInfoBena = userInfoBenaDao.load(123456L);
+        EventBus.getDefault().register(this);//订阅
+
+        userInfoBena = userInfoBenaDao.load(MyAppLaction.ShenfenzhengId);
         if (userInfoBena == null) {
             Toast tastyToast = TastyToast.makeText(ShuaYaoActivity.this, "请先读取身份证信息", TastyToast.LENGTH_LONG, TastyToast.ERROR);
             tastyToast.setGravity(Gravity.CENTER, 0, 0);
@@ -61,6 +71,23 @@ public class ShuaYaoActivity extends Activity {
         adapter = new GouMaiYaoAdapter(ShuaYaoActivity.this, tianJiaYaoList);
         listview.setAdapter(adapter);
 
+
+    }
+
+
+    //编辑adapter传来的改变值
+    @Subscribe(threadMode = ThreadMode.MAIN) //在ui线程执行
+    public void onDataSynEvent(Bianji event) {
+        Log.d("ShuaYaoActivity", "event.getP():" + event.getP()+"  "+event.getShuliang()+"  "+event.getYaoming());
+        if (event.getType()==1){
+            tianJiaYaoList.get(event.getP()).setYaoming(event.getYaoming());
+            tianJiaYaoList.get(event.getP()).setShuliang(event.getShuliang());
+            adapter.notifyDataSetChanged();
+        }else {
+            //删除
+            tianJiaYaoList.remove(event.getP());
+            adapter.notifyDataSetChanged();
+        }
 
     }
 
@@ -83,6 +110,21 @@ public class ShuaYaoActivity extends Activity {
 
                 break;
             case R.id.baocun:
+
+                for (TianJiaYao tianJiaYao:tianJiaYaoList){
+                    try {
+                        tianJiaYaoDao.insert(tianJiaYao);
+                    }catch (Exception e){
+                        Log.d("ShuaYaoActivity", e.getMessage()+"添加到本地异常");
+                    }
+
+                }
+
+                Toast tastyToast = TastyToast.makeText(ShuaYaoActivity.this, "保存成功", TastyToast.LENGTH_SHORT, TastyToast.INFO);
+                tastyToast.setGravity(Gravity.CENTER, 0, 0);
+                tastyToast.show();
+                EventBus.getDefault().post(new FaSong("im3","",true));
+                finish();
 
                 break;
         }
@@ -117,7 +159,7 @@ public class ShuaYaoActivity extends Activity {
                     tianJiaYao.setShuliang(1);
                     tianJiaYao.setBianma(result.getContents());
                     tianJiaYao.setSfzHao(userInfoBena.getCertNumber() == null ? "未获取到" : userInfoBena.getCertNumber());
-                    tianJiaYao.setYaoming("测试");
+                    tianJiaYao.setYaoming("测试"+System.currentTimeMillis());
                     tianJiaYaoList.add(tianJiaYao);
                     adapter.notifyDataSetChanged();
                 }
@@ -129,4 +171,9 @@ public class ShuaYaoActivity extends Activity {
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);//解除订阅
+    }
 }
