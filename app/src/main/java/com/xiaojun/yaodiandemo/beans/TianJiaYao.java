@@ -19,9 +19,10 @@ public class TianJiaYao {
     private String riqi;
     private String sfzHao;
     private String tuPianPath;
-    @Generated(hash = 1643088478)
+    private String bianma;
+    @Generated(hash = 1481788741)
     public TianJiaYao(@NotNull Long id, String name, String yaoming, int shuliang,
-            String riqi, String sfzHao, String tuPianPath) {
+            String riqi, String sfzHao, String tuPianPath, String bianma) {
         this.id = id;
         this.name = name;
         this.yaoming = yaoming;
@@ -29,6 +30,7 @@ public class TianJiaYao {
         this.riqi = riqi;
         this.sfzHao = sfzHao;
         this.tuPianPath = tuPianPath;
+        this.bianma = bianma;
     }
     @Generated(hash = 1309602906)
     public TianJiaYao() {
@@ -74,6 +76,12 @@ public class TianJiaYao {
     }
     public void setTuPianPath(String tuPianPath) {
         this.tuPianPath = tuPianPath;
+    }
+    public String getBianma() {
+        return this.bianma;
+    }
+    public void setBianma(String bianma) {
+        this.bianma = bianma;
     }
 
     

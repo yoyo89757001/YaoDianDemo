@@ -13,37 +13,56 @@
         android:layout_height="52dp">
 
         <TextView
-            android:text="序号"
             android:textColor="@color/write"
             android:textSize="16sp"
             android:gravity="center"
+            android:id="@+id/xuhao"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content" />
         <TextView
-            android:text="药名"
             android:textColor="@color/write"
             android:textSize="16sp"
             android:gravity="center"
+            android:id="@+id/yaoming"
             android:layout_width="0dp"
             android:layout_weight="3.2"
             android:layout_height="wrap_content" />
         <TextView
-            android:text="数量"
             android:textColor="@color/write"
             android:textSize="16sp"
+            android:id="@+id/shuliang"
             android:gravity="center"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content" />
-        <TextView
-            android:text="操作"
-            android:gravity="center"
-            android:textSize="16sp"
-            android:textColor="@color/write"
-            android:layout_width="0dp"
+
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_weight="2.2"
-            android:layout_height="wrap_content" />
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/bianji"
+                android:padding="2dp"
+                android:src="@drawable/bianji"
+                android:layout_width="30dp"
+                android:layout_marginRight="5dp"
+                android:layout_height="30dp" />
+
+            <ImageView
+                android:padding="2dp"
+                android:id="@+id/shanchu"
+                android:src="@drawable/shanchu"
+                android:layout_marginLeft="5dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+
+
+        </LinearLayout>
+
 
 
     </LinearLayout>

@@ -95,19 +95,32 @@ public class ShuaYaoActivity extends Activity {
         if (result != null) {
             if (result.getContents() != null) {
                 Log.d("HomePageActivity", result.getContents());
-                //  Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
-                TianJiaYao tianJiaYao = new TianJiaYao();
-                tianJiaYao.setId(System.currentTimeMillis());
-                tianJiaYao.setName(userInfoBena.getPartyName() == null ? "未获取到" : userInfoBena.getPartyName());
-                tianJiaYao.setRiqi(DateUtils.timesTwo(System.currentTimeMillis() + ""));
-                tianJiaYao.setShuliang(1);
-                tianJiaYao.setSfzHao(userInfoBena.getCertNumber() == null ? "未获取到" : userInfoBena.getCertNumber());
-                tianJiaYao.setYaoming("测试");
+               int size= tianJiaYaoList.size();
+                boolean fs=false;
+                for (int i=0;i<size;i++){
+                    if (tianJiaYaoList.get(i).getBianma().equals(result.getContents())){
+                        //是同一个编码 数量加1
+                        fs=true;
+                        tianJiaYaoList.get(i).setShuliang(tianJiaYaoList.get(i).getShuliang()+1);
+                        adapter.notifyDataSetChanged();
+                        break;
+                    }
 
-                tianJiaYaoList.add(tianJiaYao);
-                adapter.notifyDataSetChanged();
-
-
+                }
+                //不是同一个编码 重新生成一个药品
+                if (!fs){
+                    //  Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
+                    TianJiaYao tianJiaYao = new TianJiaYao();
+                    tianJiaYao.setId(System.currentTimeMillis());
+                    tianJiaYao.setName(userInfoBena.getPartyName() == null ? "未获取到" : userInfoBena.getPartyName());
+                    tianJiaYao.setRiqi(DateUtils.timesTwo(System.currentTimeMillis() + ""));
+                    tianJiaYao.setShuliang(1);
+                    tianJiaYao.setBianma(result.getContents());
+                    tianJiaYao.setSfzHao(userInfoBena.getCertNumber() == null ? "未获取到" : userInfoBena.getCertNumber());
+                    tianJiaYao.setYaoming("测试");
+                    tianJiaYaoList.add(tianJiaYao);
+                    adapter.notifyDataSetChanged();
+                }
                 ggg.setVisibility(View.GONE);
 
             }

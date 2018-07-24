@@ -1,15 +1,18 @@
 package com.xiaojun.yaodiandemo.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
 import com.xiaojun.yaodiandemo.R;
 import com.xiaojun.yaodiandemo.beans.TianJiaYao;
+import com.xiaojun.yaodiandemo.dialog.BianJiDialog;
 
 import java.util.List;
 
@@ -22,12 +25,13 @@ public class GouMaiYaoAdapter extends BaseAdapter {
 
     private LayoutInflater mInflater;//得到一个LayoutInfalter对象用来导入布局
     private List<TianJiaYao> fuWuQiBeanList;
-
+    private Context context;
 
 
 
     /*构造函数*/
     public GouMaiYaoAdapter(Context context, List<TianJiaYao> plansBeanList) {
+        this.context=context;
         this.mInflater = LayoutInflater.from(context);
         this.fuWuQiBeanList=plansBeanList;
 
@@ -60,20 +64,40 @@ public class GouMaiYaoAdapter extends BaseAdapter {
             convertView = mInflater.inflate(R.layout.goumaiyao_item,null);
             holder = new ViewHolder();
                     /*得到各个控件的对象*/
-            holder.title = (TextView) convertView.findViewById(R.id.dizhi);
+            holder.xuhao = (TextView) convertView.findViewById(R.id.xuhao);
+            holder.shuliang = (TextView) convertView.findViewById(R.id.shuliang);
+            holder.yaoming = (TextView) convertView.findViewById(R.id.yaoming);
+            holder.bianji = (ImageView) convertView.findViewById(R.id.bianji);
+            holder.shanchu = (ImageView) convertView.findViewById(R.id.shanchu);
             convertView.setTag(holder);//绑定ViewHolder对象
         }
         else{
             holder = (ViewHolder)convertView.getTag();//取出ViewHolder对象
         }
 
-      //  holder.title.setText(fuWuQiBeanList.get(position).getArea());
+        holder.xuhao.setText((position+1)+"");
+        holder.shuliang.setText(fuWuQiBeanList.get(position).getShuliang()+"");
+        holder.yaoming.setText(fuWuQiBeanList.get(position).getYaoming());
+        holder.bianji.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BianJiDialog dialog=new BianJiDialog(context);
+                dialog.show();
+            }
+        });
+        holder.shanchu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("GouMaiYaoAdapter", "dddd");
+            }
+        });
 
         return convertView;
     }
     /*存放控件*/
    private class ViewHolder{
-        public TextView title;
+        public TextView xuhao,shuliang,yaoming;
+        public ImageView bianji,shanchu;
 
 
     }
