@@ -5,10 +5,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.xiaojun.yaodiandemo.R;
 import com.xiaojun.yaodiandemo.view.GlideRoundTransform;
@@ -21,9 +19,8 @@ import com.xiaojun.yaodiandemo.view.GlideRoundTransform;
  * @author Tom.Cai
  */
 public class YaoXiangqingDialog extends Dialog {
-    private TextView shualiang,yaoming;
-    private ImageView imageView;
-    private Button queren,quxiao;
+    private TextView guanbi,xingming,xingbie,nianling,dianhua,yaoming,riqi,shuliang,shenfangren;
+    private ImageView imageView,imageView2;
     private Context context;
 
     public YaoXiangqingDialog(Context context) {
@@ -34,21 +31,40 @@ public class YaoXiangqingDialog extends Dialog {
 
     private void setCustomDialog() {
         View mView = LayoutInflater.from(getContext()).inflate(R.layout.queren_ll5, null);
-        shualiang= (TextView) mView.findViewById(R.id.shuliang);
+        xingming= (TextView) mView.findViewById(R.id.xingming);
+        xingbie= (TextView) mView.findViewById(R.id.xingbie);
+        nianling= (TextView) mView.findViewById(R.id.nianling);
+        dianhua= (TextView) mView.findViewById(R.id.dianhua);
         yaoming= (TextView) mView.findViewById(R.id.yaoming);
+        riqi= (TextView) mView.findViewById(R.id.riqi);
+        shuliang= (TextView) mView.findViewById(R.id.shuliang);
+        shenfangren= (TextView) mView.findViewById(R.id.shenfangren);
         imageView= (ImageView) mView.findViewById(R.id.tupian);
-        queren= (Button) mView.findViewById(R.id.queren);
-        quxiao= (Button) mView.findViewById(R.id.quxiao);
+        imageView2= (ImageView) mView.findViewById(R.id.tupian2);
+        guanbi=mView.findViewById(R.id.guanbi);
+        guanbi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
         super.setContentView(mView);
 
 
     }
 
-    public void setText(String yaomin,String shuliag){
-        shualiang.setText(shuliag);
-        yaoming.setText(yaomin);
+    public void setText(String xm,String xb,String nl,String dh,String ym,String rq,String sl,String sfr){
+        xingming.setText(xm);
+        xingbie.setText(xb);
+        nianling.setText(nl);
+        dianhua.setText(dh);
+        yaoming.setText(ym);
+        riqi.setText(rq);
+        shuliang.setText(sl);
+        shenfangren.setText(sfr);
+
     }
-    public void setImageView(String path){
+    public void setImageView(String path,String path2){
 
         Glide.with(context)
                 //	.load(R.drawable.vvv)
@@ -58,6 +74,15 @@ public class YaoXiangqingDialog extends Dialog {
                 .transform(new GlideRoundTransform(context, 20))
                 //.transform(new GlideCircleTransform(MyApplication.getAppContext(),2,Color.parseColor("#ffffffff")))
                 .into(imageView);
+
+        Glide.with(context)
+                //	.load(R.drawable.vvv)
+                .load(path2)
+                .error(R.drawable.erroy_bg)
+                //.apply(myOptions)
+                .transform(new GlideRoundTransform(context, 20))
+                //.transform(new GlideCircleTransform(MyApplication.getAppContext(),2,Color.parseColor("#ffffffff")))
+                .into(imageView2);
     }
 
 
@@ -74,18 +99,18 @@ public class YaoXiangqingDialog extends Dialog {
     public void setContentView(View view) {
     }
 
-    /**
-     * 确定键监听器
-     * @param listener
-     */
-    public void setOnPositiveListener(View.OnClickListener listener){
-        queren.setOnClickListener(listener);
-    }
-    /**
-     * 取消键监听器
-     * @param listener
-     */
-    public void setOnQuXiaoListener(View.OnClickListener listener){
-        quxiao.setOnClickListener(listener);
-    }
+//    /**
+//     * 确定键监听器
+//     * @param listener
+//     */
+//    public void setOnPositiveListener(View.OnClickListener listener){
+//        queren.setOnClickListener(listener);
+//    }
+//    /**
+//     * 取消键监听器
+//     * @param listener
+//     */
+//    public void setOnQuXiaoListener(View.OnClickListener listener){
+//        quxiao.setOnClickListener(listener);
+//    }
 }

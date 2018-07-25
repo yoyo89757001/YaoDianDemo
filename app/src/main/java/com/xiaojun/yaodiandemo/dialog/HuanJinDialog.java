@@ -17,7 +17,7 @@ import com.xiaojun.yaodiandemo.R;
  * @author Tom.Cai
  */
 public class HuanJinDialog extends Dialog {
-    private TextView weizhi,wendu,shidu,shijian,jianyi;
+    private TextView weizhi,wendu,shidu,shijian,jianyi,guanbi;
     private Context context;
 
     public HuanJinDialog(Context context) {
@@ -33,6 +33,13 @@ public class HuanJinDialog extends Dialog {
         shidu= (TextView) mView.findViewById(R.id.shidu);
         shijian= (TextView) mView.findViewById(R.id.shijian);
         jianyi= (TextView) mView.findViewById(R.id.jianyi);
+        guanbi=mView.findViewById(R.id.guanbi);
+        guanbi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
         super.setContentView(mView);
 
 

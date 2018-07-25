@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.xiaojun.yaodiandemo.R;
 import com.xiaojun.yaodiandemo.adapter.ChaXunHuanJingAdapter;
 import com.xiaojun.yaodiandemo.beans.HuanJingBean;
+import com.xiaojun.yaodiandemo.dialog.HuanJinDialog;
 import com.xiaojun.yaodiandemo.utils.DateUtils;
 
 import java.util.ArrayList;
@@ -48,7 +49,11 @@ public class ChaXunHuanJingActivity extends Activity {
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                HuanJinDialog dialog=new HuanJinDialog(ChaXunHuanJingActivity.this);
+                dialog.setText(huanJingBeanList.get(position).getWeizhi(),huanJingBeanList.get(position).getWendu(),
+                        huanJingBeanList.get(position).getShidu(),huanJingBeanList.get(position).getShijian(),
+                        huanJingBeanList.get(position).getJianyi());
+                dialog.show();
 
             }
         });
