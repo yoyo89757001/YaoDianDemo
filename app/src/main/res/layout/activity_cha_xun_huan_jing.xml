@@ -23,11 +23,12 @@
             android:textColor="@color/write"
             android:textSize="16sp"
             android:text="返回"
+            android:gravity="center"
             android:id="@+id/t_fanhui"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/gg"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent" />
 
         <TextView
             android:textColor="@color/write"

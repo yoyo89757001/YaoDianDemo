@@ -73,7 +73,7 @@ public class ShouYeActivity extends Activity {
 
 
 
-        String s="关于举办2018年广东省食品药品科普宣传基地“一日游”活动的通告\n为进一步向社会公众普及食品药品知识，树立食品药品安全人人有责的观念，根据2018年省食品药品监督管理局宣传工作计划安排,结合科普宣传工作要求，广东省执业药师注册中心将开展2018年度“广东省食品药品科普宣传基地一日游”活动。详情及报名请扫描二维码关注安安有约微信公众号";
+        String s="    为进一步向社会公众普及食品药品知识，树立食品药品安全人人有责的观念，根据2018年省食品药品监督管理局宣传工作计划安排,结合科普宣传工作要求，广东省执业药师注册中心将开展2018年度“广东省食品药品科普宣传基地一日游”活动。详情及报名请扫描二维码关注安安有约微信公众号";
 
        List<String> ss= Utils.getStrList(s,250);
 
@@ -96,6 +96,8 @@ public class ShouYeActivity extends Activity {
                 final View view1 = View.inflate(ShouYeActivity.this, R.layout.tishi_item, null);
                 ImageView imageView= (ImageView) view1.findViewById(R.id.touxiang);
                 VerticalScrolledListview textView= (VerticalScrolledListview) view1.findViewById(R.id.tishi);
+                TextView biaoti=view1.findViewById(R.id.biaoti);
+                biaoti.setText("关于举办2018年广东省食品药品科普宣传基地“一日游”活动的通告");
                 imageView.setImageBitmap(zuiFanList.get(count).getBitmap());
                 textView.setData(zuiFanList.get(count).getTishi());
                 try {

@@ -55,7 +55,7 @@
             android:id="@+id/f4"
             android:orientation="vertical"
             android:gravity="center"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -74,7 +74,7 @@
                 android:id="@+id/dengji3"
                 android:layout_width="170dp"
                 android:layout_height="60dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="30dp"
                 android:background="@drawable/jiaohu7"
                 android:gravity="center"
                 android:text="购药信息查询"
@@ -86,7 +86,7 @@
                 android:id="@+id/dengji4"
                 android:layout_width="170dp"
                 android:layout_height="60dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="30dp"
                 android:background="@drawable/jiaohu7"
                 android:gravity="center"
                 android:text="环境信息查询"
@@ -108,34 +108,38 @@
             android:textColor="@color/write"
             android:textSize="18sp"
             android:text="药品科普动态"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/zidonghuoqu3"
             android:gravity="center"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:layout_marginLeft="10dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
             android:layout_above="@+id/tishi_ll"
             android:layout_width="wrap_content"
             android:layout_height="40dp" />
 
-        <ImageView
-            android:src="@drawable/yisheng"
-            android:layout_width="70dp"
-            android:layout_marginLeft="-70dp"
-            android:layout_alignParentBottom="true"
-            android:layout_toRightOf="@+id/tishi_ll"
-            android:layout_height="wrap_content" />
+        <!--<ImageView-->
+            <!--android:src="@drawable/yisheng"-->
+            <!--android:layout_width="70dp"-->
+            <!--android:layout_marginLeft="-70dp"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_toRightOf="@+id/tishi_ll"-->
+            <!--android:layout_height="wrap_content" />-->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:id="@+id/tishi_ll"
             android:layout_marginTop="-4dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="60dp"
+            android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/zidonghuoqu3"
             android:layout_alignParentBottom="true"
             android:gravity="center"
             android:orientation="horizontal"
             android:layout_height="200dp">
+
+
+
 
 
         </LinearLayout>
