@@ -19,7 +19,10 @@ import com.xiaojun.yaodiandemo.R;
 import com.xiaojun.yaodiandemo.adapter.ChaXunYaoAdapter;
 import com.xiaojun.yaodiandemo.beans.TianJiaYao;
 import com.xiaojun.yaodiandemo.beans.TianJiaYaoDao;
+import com.xiaojun.yaodiandemo.beans.UserInfoBena;
+import com.xiaojun.yaodiandemo.beans.UserInfoBenaDao;
 import com.xiaojun.yaodiandemo.dialog.YaoXiangqingDialog;
+import com.xiaojun.yaodiandemo.utils.DateUtils;
 
 import org.greenrobot.greendao.query.WhereCondition;
 
@@ -47,6 +50,7 @@ public class ChaXunYaoJiLuActivity extends Activity {
     private ChaXunYaoAdapter adapter;
     private List<TianJiaYao> tianJiaYaoList=new ArrayList<>();
     private TianJiaYaoDao dao= MyAppLaction.myAppLaction.getDaoSession().getTianJiaYaoDao();
+    private UserInfoBenaDao sfzDao=MyAppLaction.myAppLaction.getDaoSession().getUserInfoBenaDao();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,15 +58,22 @@ public class ChaXunYaoJiLuActivity extends Activity {
         setContentView(R.layout.activity_cha_xun_yao_ji_lu);
         ButterKnife.bind(this);
         adapter=new ChaXunYaoAdapter(ChaXunYaoJiLuActivity.this,tianJiaYaoList);
+
         listview.setAdapter(adapter);
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("ChaXunYaoJiLuActivity", "position:" + position);
+               // Log.d("ChaXunYaoJiLuActivity", "position:" + position);
+                List<UserInfoBena> userInfoBena1= sfzDao.queryBuilder().where(UserInfoBenaDao.Properties.CertNumber.eq(tianJiaYaoList.get(position).getSfzHao())).list();
+                UserInfoBena userInfoBena=userInfoBena1.get(userInfoBena1.size()-1);
                 YaoXiangqingDialog dialog=new YaoXiangqingDialog(ChaXunYaoJiLuActivity.this);
-
+                dialog.setText(tianJiaYaoList.get(position).getName(),userInfoBena.getGender(),
+                        (Integer.valueOf(DateUtils.timeNian(System.currentTimeMillis()+""))-Integer.valueOf(userInfoBena.getBornDay().split("-")[0]))+"",
+                        userInfoBena.getDianhua(),tianJiaYaoList.get(position).getYaoming(),tianJiaYaoList.get(position).getRiqi(),
+                        tianJiaYaoList.get(position).getShuliang()+"",userInfoBena.getShenFangRen());
+                dialog.setImageView(null,userInfoBena.getYaoDanPath());
                 dialog.show();
-
+                Log.d("ChaXunYaoJiLuActivity", userInfoBena.getDianhua()+"电话");
             }
         });
 

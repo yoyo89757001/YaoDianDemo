@@ -211,6 +211,12 @@ public class ShuaShenFenZhenActivity extends Activity {
             @Override
             public void onClick(View v) {
                 EventBus.getDefault().post(new FaSong("im1","",true));
+                try {
+                    userInfoBena.setDianhua(dianhua.getText().toString().trim());
+                    userInfoBenaDao.insert(userInfoBena);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
                 finish();
 
             }
@@ -299,13 +305,14 @@ public class ShuaShenFenZhenActivity extends Activity {
                 youxiaoqixian.setText(time2 + " " + time3);
                 zhuzhi.setText(info.getAddress());
 
-
                 zhengjianzhao.setImageBitmap(zhengjianBitmap);
                 String fn = System.currentTimeMillis()+".jpg";
                 FileUtil.isExists(FileUtil.PATH, fn);
                 Long id=System.currentTimeMillis();
                 MyAppLaction.ShenfenzhengId=id;
-                userInfoBena = new UserInfoBena(id,info.getName().trim(), info.getSex().trim(), info.getNation().trim(), time, info.getAddress(), info.getNo(), info.getApartment().trim(), time2, time3, null, null, null,null,null);
+                userInfoBena = new UserInfoBena(id,info.getName().trim(), info.getSex().trim(), info.getNation().trim(), time,
+                        info.getAddress(), info.getNo(), info.getApartment().trim(), time2, time3, null, null,
+                        null,null,null,dianhua.getText().toString().trim());
 
                 saveBitmap2File(zhengjianBitmap.copy(Bitmap.Config.ARGB_8888, false), FileUtil.SDPATH + File.separator + FileUtil.PATH + File.separator + fn, 100);
 
@@ -349,7 +356,7 @@ public class ShuaShenFenZhenActivity extends Activity {
             bos.close();
 
             userInfoBena.setCardPhoto(path);
-            userInfoBenaDao.insert(userInfoBena);
+
             if (jiaZaiDialog!=null &&jiaZaiDialog.isShowing()){
                 jiaZaiDialog.dismiss();
                 jiaZaiDialog=null;

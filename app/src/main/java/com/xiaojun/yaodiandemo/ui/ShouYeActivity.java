@@ -32,8 +32,6 @@ public class ShouYeActivity extends Activity {
     private static int count=0;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,6 +126,7 @@ public class ShouYeActivity extends Activity {
             task.cancel();
 
         task = new TimerTask() {
+
             @Override
             public void run() {
 

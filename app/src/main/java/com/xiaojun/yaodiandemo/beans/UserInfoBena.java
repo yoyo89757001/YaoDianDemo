@@ -27,11 +27,13 @@ public class UserInfoBena {
     private String type;
     private String yaoDanPath;
     private String shenFangRen;
-    @Generated(hash = 1209890349)
+    private String dianhua;
+    @Generated(hash = 95130905)
     public UserInfoBena(@NotNull Long id, String partyName, String gender,
             String nation, String bornDay, String certAddress, String certNumber,
             String certOrg, String effDate, String expDate, String cardPhoto,
-            String scanPhoto, String type, String yaoDanPath, String shenFangRen) {
+            String scanPhoto, String type, String yaoDanPath, String shenFangRen,
+            String dianhua) {
         this.id = id;
         this.partyName = partyName;
         this.gender = gender;
@@ -47,6 +49,7 @@ public class UserInfoBena {
         this.type = type;
         this.yaoDanPath = yaoDanPath;
         this.shenFangRen = shenFangRen;
+        this.dianhua = dianhua;
     }
     @Generated(hash = 654706014)
     public UserInfoBena() {
@@ -141,8 +144,33 @@ public class UserInfoBena {
     public void setShenFangRen(String shenFangRen) {
         this.shenFangRen = shenFangRen;
     }
+    public String getDianhua() {
+        return this.dianhua;
+    }
+    public void setDianhua(String dianhua) {
+        this.dianhua = dianhua;
+    }
 
 
-    
-
+    @Override
+    public String toString() {
+        return "UserInfoBena{" +
+                "id=" + id +
+                ", partyName='" + partyName + '\'' +
+                ", gender='" + gender + '\'' +
+                ", nation='" + nation + '\'' +
+                ", bornDay='" + bornDay + '\'' +
+                ", certAddress='" + certAddress + '\'' +
+                ", certNumber='" + certNumber + '\'' +
+                ", certOrg='" + certOrg + '\'' +
+                ", effDate='" + effDate + '\'' +
+                ", expDate='" + expDate + '\'' +
+                ", cardPhoto='" + cardPhoto + '\'' +
+                ", scanPhoto='" + scanPhoto + '\'' +
+                ", type='" + type + '\'' +
+                ", yaoDanPath='" + yaoDanPath + '\'' +
+                ", shenFangRen='" + shenFangRen + '\'' +
+                ", dianhua='" + dianhua + '\'' +
+                '}';
+    }
 }

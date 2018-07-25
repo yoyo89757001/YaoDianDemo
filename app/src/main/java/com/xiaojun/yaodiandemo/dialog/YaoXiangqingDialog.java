@@ -2,6 +2,7 @@ package com.xiaojun.yaodiandemo.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -58,6 +59,7 @@ public class YaoXiangqingDialog extends Dialog {
         xingbie.setText(xb);
         nianling.setText(nl);
         dianhua.setText(dh);
+        Log.d("YaoXiangqingDialog", dh+"电话");
         yaoming.setText(ym);
         riqi.setText(rq);
         shuliang.setText(sl);
@@ -68,10 +70,10 @@ public class YaoXiangqingDialog extends Dialog {
 
         Glide.with(context)
                 //	.load(R.drawable.vvv)
-                .load(path)
+                .load(R.drawable.yao_bg)
                 .error(R.drawable.erroy_bg)
                 //.apply(myOptions)
-                .transform(new GlideRoundTransform(context, 20))
+                .transform(new GlideRoundTransform(context, 4))
                 //.transform(new GlideCircleTransform(MyApplication.getAppContext(),2,Color.parseColor("#ffffffff")))
                 .into(imageView);
 
@@ -80,7 +82,7 @@ public class YaoXiangqingDialog extends Dialog {
                 .load(path2)
                 .error(R.drawable.erroy_bg)
                 //.apply(myOptions)
-                .transform(new GlideRoundTransform(context, 20))
+                .transform(new GlideRoundTransform(context, 4))
                 //.transform(new GlideCircleTransform(MyApplication.getAppContext(),2,Color.parseColor("#ffffffff")))
                 .into(imageView2);
     }

@@ -353,8 +353,8 @@
 
             <ImageView
                 android:id="@+id/tupian"
+                android:scaleType="fitXY"
                 android:layout_marginLeft="26dp"
-                android:background="@color/colorBar_bg"
                 android:layout_marginRight="4dp"
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -363,7 +363,7 @@
             <ImageView
                 android:id="@+id/tupian2"
                 android:layout_marginLeft="4dp"
-                android:background="@color/colorBar_bg"
+                android:scaleType="fitXY"
                 android:layout_marginRight="26dp"
                 android:layout_width="0dp"
                 android:layout_weight="1"

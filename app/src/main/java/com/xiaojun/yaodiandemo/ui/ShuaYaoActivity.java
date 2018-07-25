@@ -163,7 +163,7 @@ public class ShuaYaoActivity extends Activity {
                     tianJiaYao.setShuliang(1);
                     tianJiaYao.setBianma(result.getContents());
                     tianJiaYao.setSfzHao(userInfoBena.getCertNumber() == null ? "未获取到" : userInfoBena.getCertNumber().trim());
-                    tianJiaYao.setYaoming("测试"+System.currentTimeMillis());
+                    tianJiaYao.setYaoming("氢溴酸右美沙芬口服溶液");
                     tianJiaYaoList.add(tianJiaYao);
                     adapter.notifyDataSetChanged();
                 }

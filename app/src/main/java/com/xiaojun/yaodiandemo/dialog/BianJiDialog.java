@@ -50,10 +50,10 @@ public class BianJiDialog extends Dialog {
 
         Glide.with(context)
                 //	.load(R.drawable.vvv)
-                .load(path)
+                .load(R.drawable.yao_bg)
                 .error(R.drawable.erroy_bg)
                 //.apply(myOptions)
-                .transform(new GlideRoundTransform(context, 20))
+                .transform(new GlideRoundTransform(context, 4))
                 //.transform(new GlideCircleTransform(MyApplication.getAppContext(),2,Color.parseColor("#ffffffff")))
                 .into(imageView);
     }

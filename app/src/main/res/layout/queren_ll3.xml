@@ -105,9 +105,9 @@
     <ImageView
         android:id="@+id/tupian"
         android:layout_marginLeft="30dp"
-        android:background="@color/colorBar_bg"
         android:layout_marginRight="30dp"
         android:layout_marginTop="30dp"
+        android:scaleType="fitXY"
         android:layout_width="match_parent"
         android:layout_height="180dp" />
 

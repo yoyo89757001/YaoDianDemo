@@ -222,8 +222,7 @@ public class DateUtils {
         @SuppressWarnings("unused")
         long lcc = Long.valueOf(time);
         int i = Integer.parseInt(time);
-        String times = sdr.format(new Date(i * 1000L));
-        return times;
+        return sdr.format(new Date(i * 1000L));
     }
 
     public static String time(String time) {
@@ -231,8 +230,15 @@ public class DateUtils {
         @SuppressWarnings("unused")
         long lcc = Long.valueOf(time);
        // int i = Integer.parseInt(time);
-        String times = sdr.format(new Date(lcc));
-        return times;
+        return sdr.format(new Date(lcc));
+    }
+
+    public static String timeNian(String time) {
+        SimpleDateFormat sdr = new SimpleDateFormat("yyyy", Locale.CHINA);
+        @SuppressWarnings("unused")
+        long lcc = Long.valueOf(time);
+        // int i = Integer.parseInt(time);
+        return sdr.format(new Date(lcc));
     }
 
     // 调用此方法输入所要转换的时间戳例如（1402733340）输出（"2014年06月14日16时09分00秒"）
