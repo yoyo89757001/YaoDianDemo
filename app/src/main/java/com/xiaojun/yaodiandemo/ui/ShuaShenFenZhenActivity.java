@@ -283,9 +283,19 @@ public class ShuaShenFenZhenActivity extends Activity {
                 String time = info.getBorn().substring(0, 4) + "-" + info.getBorn().substring(4, 6) + "-" + info.getBorn().substring(6, 8);
                 chusheng.setText(time);
                 fazhengjiguan.setText(info.getApartment());
-
+                String time3=null;
                 String time2 = info.getPeriod().substring(0, 4) + "-" + info.getPeriod().substring(4, 6) + "-" + info.getPeriod().substring(6, 8);
-                String time3 = info.getPeriod().substring(9, 13) + "-" + info.getPeriod().substring(13, 15) + "-" + info.getPeriod().substring(15, 17);
+
+                try {
+
+                    time3 = info.getPeriod().substring(9, 13) + "-" + info.getPeriod().substring(13, 15) + "-" + info.getPeriod().substring(15, 17);
+
+                }catch (Exception e){
+                    Log.d("GetIDInfoTask", e.getMessage()+"期限异常");
+
+                    time3="长期";
+                }
+
                 youxiaoqixian.setText(time2 + " " + time3);
                 zhuzhi.setText(info.getAddress());
 
@@ -295,7 +305,7 @@ public class ShuaShenFenZhenActivity extends Activity {
                 FileUtil.isExists(FileUtil.PATH, fn);
                 Long id=System.currentTimeMillis();
                 MyAppLaction.ShenfenzhengId=id;
-                userInfoBena = new UserInfoBena(id,info.getName(), info.getSex().equals("男") ? 1 + "" : 2 + "", info.getNation(), time, info.getAddress(), info.getNo(), info.getApartment(), time2, time3, null, null, null,null,null);
+                userInfoBena = new UserInfoBena(id,info.getName().trim(), info.getSex().trim(), info.getNation().trim(), time, info.getAddress(), info.getNo(), info.getApartment().trim(), time2, time3, null, null, null,null,null);
 
                 saveBitmap2File(zhengjianBitmap.copy(Bitmap.Config.ARGB_8888, false), FileUtil.SDPATH + File.separator + FileUtil.PATH + File.separator + fn, 100);
 

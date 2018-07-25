@@ -84,6 +84,18 @@ public class TianJiaYao {
         this.bianma = bianma;
     }
 
-    
 
+    @Override
+    public String toString() {
+        return "TianJiaYao{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", yaoming='" + yaoming + '\'' +
+                ", shuliang=" + shuliang +
+                ", riqi='" + riqi + '\'' +
+                ", sfzHao='" + sfzHao + '\'' +
+                ", tuPianPath='" + tuPianPath + '\'' +
+                ", bianma='" + bianma + '\'' +
+                '}';
+    }
 }

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:background="@drawable/beijing"
     android:layout_height="match_parent"
     tools:context="com.xiaojun.yaodiandemo.ui.ChaXunHuanJingActivity">
@@ -45,5 +46,141 @@
 
     </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_marginTop="12dp"
+        android:id="@+id/r3"
+        android:layout_width="match_parent"
+        android:layout_height="44dp">
+        <TextView
+            android:textColor="@color/write"
+            android:textSize="16sp"
+            android:text="位置"
+            android:layout_marginLeft="16dp"
+            android:layout_centerVertical="true"
+            android:id="@+id/r1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-</RelativeLayout>
+        <EditText
+            android:background="@drawable/zidonghuoqu10"
+            android:paddingLeft="10dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/weizhi"
+            android:layout_centerVertical="true"
+            android:paddingRight="16dp"
+            android:textColor="@color/blake2"
+            android:textSize="16sp"
+            android:layout_toRightOf="@+id/r1"
+            android:layout_width="match_parent"
+            android:layout_height="38dp" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="44dp">
+        <TextView
+            android:textColor="@color/write"
+            android:textSize="16sp"
+            android:text="日期"
+            android:layout_marginLeft="16dp"
+            android:layout_centerVertical="true"
+            android:id="@+id/r2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:background="@drawable/zidonghuoqu10"
+            android:paddingLeft="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="16dp"
+            android:layout_centerVertical="true"
+            android:paddingRight="6dp"
+            android:id="@+id/qiri"
+            android:gravity="center_vertical"
+            android:textColor="@color/blake2"
+            android:textSize="16sp"
+            android:layout_toRightOf="@+id/r2"
+            android:layout_width="match_parent"
+            android:layout_height="38dp" />
+
+    </RelativeLayout>
+
+    <Button
+        android:layout_width="100dp"
+        android:textColor="@color/write"
+        android:textSize="16sp"
+        android:text="查询"
+        android:id="@+id/chaxun"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/jiaohu7"
+        android:layout_height="40dp" />
+
+
+    <LinearLayout
+        android:id="@+id/ttr"
+        android:orientation="horizontal"
+        android:layout_marginTop="12dp"
+        android:background="#25000000"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="52dp">
+
+        <TextView
+            android:text="位置"
+            android:textColor="@color/write"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="温度"
+            android:textColor="@color/write"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:text="湿度"
+            android:textColor="@color/write"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="时间"
+            android:textColor="@color/write"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1.5"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="操作"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="@color/write"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </ListView>
+
+
+</LinearLayout>

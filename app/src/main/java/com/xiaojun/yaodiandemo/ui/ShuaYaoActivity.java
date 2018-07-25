@@ -158,11 +158,11 @@ public class ShuaYaoActivity extends Activity {
                     //  Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
                     TianJiaYao tianJiaYao = new TianJiaYao();
                     tianJiaYao.setId(System.currentTimeMillis());
-                    tianJiaYao.setName(userInfoBena.getPartyName() == null ? "未获取到" : userInfoBena.getPartyName());
+                    tianJiaYao.setName(userInfoBena.getPartyName() == null ? "未获取到" : userInfoBena.getPartyName().trim());
                     tianJiaYao.setRiqi(DateUtils.timesTwo(System.currentTimeMillis() + ""));
                     tianJiaYao.setShuliang(1);
                     tianJiaYao.setBianma(result.getContents());
-                    tianJiaYao.setSfzHao(userInfoBena.getCertNumber() == null ? "未获取到" : userInfoBena.getCertNumber());
+                    tianJiaYao.setSfzHao(userInfoBena.getCertNumber() == null ? "未获取到" : userInfoBena.getCertNumber().trim());
                     tianJiaYao.setYaoming("测试"+System.currentTimeMillis());
                     tianJiaYaoList.add(tianJiaYao);
                     adapter.notifyDataSetChanged();

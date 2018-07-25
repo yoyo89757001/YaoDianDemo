@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import com.xiaojun.yaodiandemo.R;
-import com.xiaojun.yaodiandemo.beans.TianJiaYao;
+import com.xiaojun.yaodiandemo.beans.HuanJingBean;
 
 
 import java.util.List;
@@ -17,16 +17,16 @@ import java.util.List;
  */
 
 
-public class ChaXunYaoAdapter extends BaseAdapter {
+public class ChaXunHuanJingAdapter extends BaseAdapter {
 
     private LayoutInflater mInflater;//得到一个LayoutInfalter对象用来导入布局
-    private List<TianJiaYao> fuWuQiBeanList;
+    private List<HuanJingBean> fuWuQiBeanList;
     private Context context;
 
 
 
     /*构造函数*/
-    public ChaXunYaoAdapter(Context context, List<TianJiaYao> plansBeanList) {
+    public ChaXunHuanJingAdapter(Context context, List<HuanJingBean> plansBeanList) {
         this.context=context;
         this.mInflater = LayoutInflater.from(context);
         this.fuWuQiBeanList=plansBeanList;
@@ -57,28 +57,29 @@ public class ChaXunYaoAdapter extends BaseAdapter {
         //观察convertView随ListView滚动情况
 
         if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.goumaiyao_item2,null);
+            convertView = mInflater.inflate(R.layout.goumaiyao_item3,null);
             holder = new ViewHolder();
                     /*得到各个控件的对象*/
-            holder.xuhao = (TextView) convertView.findViewById(R.id.xuhao);
-            holder.shuliang = (TextView) convertView.findViewById(R.id.shuliang);
-            holder.yaoming = (TextView) convertView.findViewById(R.id.yaoming);
+            holder.weizhi = (TextView) convertView.findViewById(R.id.weizhi);
+            holder.wendu = (TextView) convertView.findViewById(R.id.wendu);
+            holder.shidu = (TextView) convertView.findViewById(R.id.shidu);
+            holder.shijian = (TextView) convertView.findViewById(R.id.shijian);
             convertView.setTag(holder);//绑定ViewHolder对象
         }
         else{
             holder = (ViewHolder)convertView.getTag();//取出ViewHolder对象
         }
 
-        holder.xuhao.setText((position+1)+"");
-        holder.shuliang.setText(fuWuQiBeanList.get(position).getShuliang()+"");
-        holder.yaoming.setText(fuWuQiBeanList.get(position).getYaoming());
-
+        holder.weizhi.setText(fuWuQiBeanList.get(position).getWeizhi());
+        holder.wendu.setText(fuWuQiBeanList.get(position).getWendu());
+        holder.shidu.setText(fuWuQiBeanList.get(position).getShidu());
+        holder.shijian.setText(fuWuQiBeanList.get(position).getShijian());
 
         return convertView;
     }
     /*存放控件*/
    private class ViewHolder{
-        public TextView xuhao,shuliang,yaoming;
+        public TextView weizhi,wendu,shidu,shijian;
 
 
     }

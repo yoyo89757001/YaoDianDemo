@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">YaoDianDemo</string>
+    <string name="app_name">智能购药登记系统</string>
     <string name="title_activity_photo_viewer">Photo Viewer</string>
     <string name="idcard_zwxx">指纹信息：</string>
     <string name="idcard_ysmz">右手拇指</string>

@@ -4,14 +4,27 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.sdsmdg.tastytoast.TastyToast;
+import com.xiaojun.yaodiandemo.MyAppLaction;
 import com.xiaojun.yaodiandemo.R;
 import com.xiaojun.yaodiandemo.adapter.ChaXunYaoAdapter;
+import com.xiaojun.yaodiandemo.beans.TianJiaYao;
+import com.xiaojun.yaodiandemo.beans.TianJiaYaoDao;
+import com.xiaojun.yaodiandemo.dialog.YaoXiangqingDialog;
+
+import org.greenrobot.greendao.query.WhereCondition;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,15 +45,26 @@ public class ChaXunYaoJiLuActivity extends Activity {
     @BindView(R.id.listview)
     ListView listview;
     private ChaXunYaoAdapter adapter;
-
-
+    private List<TianJiaYao> tianJiaYaoList=new ArrayList<>();
+    private TianJiaYaoDao dao= MyAppLaction.myAppLaction.getDaoSession().getTianJiaYaoDao();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cha_xun_yao_ji_lu);
         ButterKnife.bind(this);
+        adapter=new ChaXunYaoAdapter(ChaXunYaoJiLuActivity.this,tianJiaYaoList);
+        listview.setAdapter(adapter);
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("ChaXunYaoJiLuActivity", "position:" + position);
+                YaoXiangqingDialog dialog=new YaoXiangqingDialog(ChaXunYaoJiLuActivity.this);
 
+                dialog.show();
+
+            }
+        });
 
     }
 
@@ -58,6 +82,35 @@ public class ChaXunYaoJiLuActivity extends Activity {
 
                 break;
             case R.id.chaxun:
+              //  List mtaskPath = mTaskPathDao.queryBuilder().where(TaskPathDao.Properties.Task_name.like("小%")).list();
+              String name2=name.getText().toString().trim();
+              String yaoming2=yaoming.getText().toString().trim();
+              String riqi2=qiri.getText().toString().trim();
+                if (name2.equals("") && yaoming2.equals("")&& riqi2.equals("")){
+                    Toast tastyToast = TastyToast.makeText(ChaXunYaoJiLuActivity.this, "请输入要查询的条件", TastyToast.LENGTH_SHORT, TastyToast.ERROR);
+                    tastyToast.setGravity(Gravity.CENTER, 0, 0);
+                    tastyToast.show();
+                }else {
+                 List<TianJiaYao> tianJiaYaoList2=  dao.queryBuilder().where(TianJiaYaoDao.Properties.Name.like("%"+name2+"%"),
+                            TianJiaYaoDao.Properties.Riqi.like("%"+riqi2+"%"),
+                            TianJiaYaoDao.Properties.Yaoming.like("%"+yaoming2+"%")).list();
+                    if (tianJiaYaoList2!=null && tianJiaYaoList2.size()>0){
+                        tianJiaYaoList.clear();
+                        tianJiaYaoList.addAll(tianJiaYaoList2);
+                        adapter.notifyDataSetChanged();
+
+                    }else {
+                        tianJiaYaoList.clear();
+                        adapter.notifyDataSetChanged();
+                        Toast tastyToast = TastyToast.makeText(ChaXunYaoJiLuActivity.this, "没有查询到相关信息", TastyToast.LENGTH_SHORT, TastyToast.INFO);
+                        tastyToast.setGravity(Gravity.CENTER, 0, 0);
+                        tastyToast.show();
+                    }
+
+                }
+
+
+
 
                 break;
         }
